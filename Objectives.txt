@@ -1,0 +1,60 @@
+Objectives
+----------
+
+- Dictionary
++ one word per line
++ multiple dictionaries
++ stored in a file named "medialab"
++ name: "hangman_{DICTIONARY-ID}.txt"
++ "DICTIONARY-ID" is specified by the user and contains any alphanumeric characters
++ the application will receive text content from the Open Library web service
+	https://openlibrary.org/developers/api
++ the user specifies the "Open Library ID" 
++ make a call to https://openlibrary.org/works/OPEN-LIBRARY-ID.json using the
+	"Works API" (from the Books API: https://openlibrary.org/dev/docs/api/books)
++ use the contents of the field "value" in the "description" field to create a list
+	with all the words of the available description that are least 6 letters long
++ capitalize everything
++ ignore punctuation
++ no multiple inclusions
++ at least 20 words
++ >= 20% of the words must be longer than 8 letters
+
+- Exceptions
++ InvalidCountExeception
++ UndersizeException
++ InvalidRangeException
++ UnbalancedException
+
+- Game Rounds
++ random word from the current dictionary
++ pick characters from a list
++ character list: one for each blank space, sorted according to probability
++ probability: percentage of words that contain the specific letter in the same position 
+	from those that are possible in the current state 
++ points: (p: probability) 5 if p>=0.6, 10 if 0.6>p>=0.4, 15 if 0.4>p>=.25, 30 if p<0.25
++ mistakes: maximum of five (5) mistakes, 6 mistakes: game ends, reveal word
+
+- Application's Main Window
++ title: "Medialab Hangman"
++ three (3) areas: upper, middle, lower
++ upper: available words, points, percentage of correct letters
++ middle: left, right
++ left: graphical presentation of the state of the word and hangman
++ right: list of available characters for each blank space
++ lower: form to select a letter for a specific position
++ menu bar: "Application", "Details"
++ "Application": "Start", "Load", "Create", "Exit"
++ "Start": new word from current dictionary, ongoing game is interrupted
++ "Load": popup window prompting user input: DICTIONARY-ID, find the dictionary
++ "Create": popup window prompting user input: DICTIONARY-ID and "Open Library ID" 
++ "Exit": exit app
++ "Details": "Dictionary", "Rounds", "Solution"
++ "Dictionary": popup window percentage of words with 6, 7-9 and 10 or more letters
++ "Rounds": popup window with 5 most recent games: word, number of guesses, outcome
++ "Solution": record game as lost and reveal word
+
+- Additional
++ unfinished: can be continued from "Rounds"
++ when exiting the app keep the game as unfinished in "Rounds"
++ show the probability of characters in the list also color them accordingly
